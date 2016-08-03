@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +16,19 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+</head>
+
 <body>
+    <div class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">WeeklyDev.io</div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a asp-controller="Account" asp-action="Login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -39,4 +52,5 @@
     
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

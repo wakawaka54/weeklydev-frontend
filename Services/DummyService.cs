@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Services
 {
-    public class DummyService : IApiService
+   /* public class DummyService : IApiService
     {
         public Task<string> Get(string endpoint)
         {
@@ -16,5 +16,5 @@ namespace TestApp.Services
         {
             throw new NotImplementedException();
         }
-    }
+    } */
 }

@@ -31,7 +31,7 @@ namespace TestApp.Controllers
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View(new ApplicationUser());
+            return View(new UserModel());
         }
 
         //
@@ -42,6 +42,11 @@ namespace TestApp.Controllers
         public async Task<IActionResult> Login(UserModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, model.Username));
+            ClaimsIdentity identity = new ClaimsIdentity(claims, "WeeklyDevAPIAuthentication");
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -50,6 +55,7 @@ namespace TestApp.Controllers
                 var result = true;
                 if (result)
                 {
+                    await HttpContext.Authentication.SignInAsync("WeeklyDevAPIAuthentication", new ClaimsPrincipal(identity));
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -70,19 +76,27 @@ namespace TestApp.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View(new ApplicationUser());
+            return View(new UserModel());
         }
 
         //
         // POST: /Account/Register
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> Register(ApplicationUser model, string returnUrl = null)
+        public async Task<IActionResult> Register(UserModel model, string returnUrl = null)
         {
-            return RedirectToLocal(returnUrl);
+            var response = await apiService.Post("users/new", JsonConvert.SerializeObject(model));
+            
+            if(response.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                return LocalRedirect("/Account/Login");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Error creating new user");
+                return View(model);
+            }
         }
 
       /*  //

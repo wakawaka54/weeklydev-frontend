@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using TestApp.Models;
 using TestApp.Services;
 
+using Microsoft.AspNetCore.Http;
+
 namespace TestApp
 {
     public class Startup
@@ -66,6 +68,16 @@ namespace TestApp
             app.UseStaticFiles();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "WeeklyDevAPIAuthentication",
+                LoginPath = new PathString("/Account/Login"),
+                AccessDeniedPath = new PathString("/Account/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ExpireTimeSpan = TimeSpan.FromDays(30)
+            });
 
             app.UseSession();
 

@@ -3,3 +3,8 @@
 }
 
 <h1>HOME</h1>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <p>Welcome @Context.User.Identity.Name</p>
+}
