@@ -52,7 +52,6 @@ namespace TestApp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
@@ -76,7 +75,7 @@ namespace TestApp
                 AccessDeniedPath = new PathString("/Account/Forbidden/"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                ExpireTimeSpan = TimeSpan.FromDays(30)
+                ExpireTimeSpan = TimeSpan.FromMinutes(1)
             });
 
             app.UseSession();

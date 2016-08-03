@@ -86,7 +86,10 @@ namespace TestApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserModel model, string returnUrl = null)
         {
-            var response = await apiService.Post("users/new", JsonConvert.SerializeObject(model));
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+
+            var response = await apiService.Post("users/new", JsonConvert.SerializeObject(model, settings));
             
             if(response.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
