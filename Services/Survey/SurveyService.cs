@@ -25,19 +25,18 @@ namespace TestApp.Services.Survey
         public async Task<HttpResponseMessage> GetSurvey(SurveyModel model)
         {
             var response = await apiService.Get("survey");
-            string tempString = await response.Content.ReadAsStringAsync();
 
             model = JsonConvert.DeserializeObject<SurveyModel>(await response.Content.ReadAsStringAsync());
 
             return response;
         }
 
-        public Task<HttpResponseMessage> SetSurvey(SurveyModel model)
+        public async Task<HttpResponseMessage> SetSurvey(SurveyModel model)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(model));
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-            return apiService.Post("survey", content);
+            return await apiService.Post("survey", content);
         }
     }
 }
