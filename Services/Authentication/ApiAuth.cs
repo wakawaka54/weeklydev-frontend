@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+
+namespace TestApp.Services.Authentication
+{
+    public class ApiAuth : IApiAuth
+    {
+        HttpContext context;
+
+        public ApiAuth(IHttpContextAccessor accessor)
+        {
+            context = accessor.HttpContext;
+        }
+
+        public void ApplyAuthentication(HttpClient client)
+        {
+            if (context.User.Identity.IsAuthenticated)
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", context.User.FindFirstValue(ClaimTypes.UserData));
+            }
+        }
+    }
+}

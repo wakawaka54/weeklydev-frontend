@@ -16,19 +16,33 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="navbar">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">WeeklyDev.io</div>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a asp-controller="Account" asp-action="Login">Login</a>
-                </li>
-            </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">WeeklyDev.io</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Logout">Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" >Login</a>
+                        }
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
     </div>

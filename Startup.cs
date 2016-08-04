@@ -11,9 +11,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TestApp.Models;
+
 using TestApp.Services;
+using TestApp.Services.Authentication;
+using TestApp.Services.User;
+using TestApp.Services.Survey;
 
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace TestApp
 {
@@ -46,6 +51,12 @@ namespace TestApp
 
             // Add application services.
             services.AddTransient<IApiService, ApiService>();
+            services.AddTransient<IApiAuth, ApiAuth>();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISurveyService, SurveyService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +79,7 @@ namespace TestApp
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
+            //Use WeeklyDevApi authentication
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "WeeklyDevAPIAuthentication",
@@ -75,8 +87,11 @@ namespace TestApp
                 AccessDeniedPath = new PathString("/Account/Forbidden/"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(1)
+                ExpireTimeSpan = TimeSpan.FromDays(30)
             });
+
+            //Setup JSON
+            JsonConvert.DefaultSettings = () => { return new JsonSerializerSettings() { ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() }; };
 
             app.UseSession();
 

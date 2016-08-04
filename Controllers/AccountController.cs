@@ -9,19 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using TestApp.Models;
-using TestApp.Services;
+using TestApp.Services.User;
 using Newtonsoft.Json;
 
 namespace TestApp.Controllers
 {
     public class AccountController : Controller
     {
-        private UserModel userModel;
-        private IApiService apiService;
+        private IUserService user;
 
-        public AccountController(IApiService service)
+        public AccountController(IUserService _user)
         {
-            apiService = service;
+            user = _user;
         }
 
         //
@@ -43,19 +42,13 @@ namespace TestApp.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, model.Username));
-            ClaimsIdentity identity = new ClaimsIdentity(claims, "WeeklyDevAPIAuthentication");
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                //var result = await apiService.Post("/login", JsonConvert.SerializeObject(model));
-                var result = true;
-                if (result)
+                var response = await user.Login(model);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    await HttpContext.Authentication.SignInAsync("WeeklyDevAPIAuthentication", new ClaimsPrincipal(identity));
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -67,6 +60,18 @@ namespace TestApp.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            var response = await user.Logout();
+            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return LocalRedirect("/");
+            }
+
+            return LocalRedirect("/");
         }
 
         //
@@ -86,12 +91,9 @@ namespace TestApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserModel model, string returnUrl = null)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
-
-            var response = await apiService.Post("users/new", JsonConvert.SerializeObject(model, settings));
+            var response = await user.Register(model);
             
-            if(response.StatusCode == System.Net.HttpStatusCode.Accepted)
+            if(response.StatusCode == System.Net.HttpStatusCode.Created)
             {
                 return LocalRedirect("/Account/Login");
             }

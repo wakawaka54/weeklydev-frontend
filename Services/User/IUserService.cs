@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 using TestApp.Models;
 
 namespace TestApp.Services.User
 {
-    interface IUserService
+    public interface IUserService
     {
-        bool Login(ApplicationUser user);
-        ApplicationUser GetUser(string jwt);
-        bool Logout();
+        Task<HttpResponseMessage> Login(UserModel user);
+        Task<HttpResponseMessage> Logout();
+        Task<HttpResponseMessage> Register(UserModel user);
     }
 }
