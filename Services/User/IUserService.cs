@@ -13,5 +13,6 @@ namespace TestApp.Services.User
         Task<HttpResponseMessage> Login(UserModel user);
         Task<HttpResponseMessage> Logout();
         Task<HttpResponseMessage> Register(UserModel user);
+        Task<UserModel> Me();
     }
 }

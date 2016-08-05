@@ -10,7 +10,7 @@ namespace TestApp.Services.Survey
 {
     public interface ISurveyService
     {
-        Task<HttpResponseMessage> GetSurvey(SurveyModel model);
+        Task<SurveyModel> GetSurvey();
         Task<HttpResponseMessage> SetSurvey(SurveyModel model);
     }
 }

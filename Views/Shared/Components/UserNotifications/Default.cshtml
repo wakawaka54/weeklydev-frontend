@@ -1,0 +1,13 @@
+﻿
+@model UserModel
+
+<li class="dropdown">
+    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @Model.Username
+        <span class="badge">4</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a asp-controller="Survey" asp-action="Survey">Complete survey <span class="label label-primary">!</span></a></li>
+        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+    </ul>
+</li>

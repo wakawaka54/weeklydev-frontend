@@ -10,5 +10,6 @@ namespace TestApp.Services
         public const string Login = "login";
         public const string Register = "users/new";
         public const string Logout = "logout";
+        public const string UserMe = "users/me";
     }
 }

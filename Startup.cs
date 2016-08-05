@@ -16,6 +16,9 @@ using TestApp.Services;
 using TestApp.Services.Authentication;
 using TestApp.Services.User;
 using TestApp.Services.Survey;
+using TestApp.Services.Projects;
+using TestApp.Services.Teams;
+using TestApp.Services.Submissions;
 
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -55,6 +58,9 @@ namespace TestApp
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISurveyService, SurveyService>();
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<ISubmissionService, SubmissionService>();
+            services.AddTransient<ITeamService, TeamService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }

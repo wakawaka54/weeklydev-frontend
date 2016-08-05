@@ -20,9 +20,9 @@
                     <label asp-for="Role" class="col-md-2 control-label">Select Perferred Role:</label>
                     <div class="col-md-10">
                         <select asp-for="Role" class="selectpicker" data-style="btn-default" multiple>
-                            <option>Manager</option>
-                            <option>Frontend</option>
-                            <option>Backend</option>
+                            <option value="manager">Manager</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
                         </select>
                         <span asp-validation-for="Role" class="text-danger"></span>
                     </div>

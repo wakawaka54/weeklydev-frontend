@@ -10,25 +10,24 @@ using Newtonsoft.Json;
 
 namespace TestApp.Services.Survey
 {
-    public class SurveyService : ISurveyService
+    public class SurveyService : ApiServiceBase, ISurveyService
     {
-        IApiService apiService;
         HttpContext context;
 
         public SurveyService(IApiService _apiService,
             IHttpContextAccessor _accessor)
+            :base(_apiService)
         {
-            apiService = _apiService;
             context = _accessor.HttpContext;
         }
 
-        public async Task<HttpResponseMessage> GetSurvey(SurveyModel model)
+        public async Task<SurveyModel> GetSurvey()
         {
             var response = await apiService.Get("survey");
 
-            model = JsonConvert.DeserializeObject<SurveyModel>(await response.Content.ReadAsStringAsync());
+            var model = JsonConvert.DeserializeObject<SurveyModel>(await response.Content.ReadAsStringAsync());
 
-            return response;
+            return model;
         }
 
         public async Task<HttpResponseMessage> SetSurvey(SurveyModel model)

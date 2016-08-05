@@ -14,15 +14,13 @@ using System.Security.Claims;
 
 namespace TestApp.Services.User
 {
-    public class UserService : IUserService
+    public class UserService : ApiServiceBase, IUserService
     {
-        IApiService apiService;
         HttpContext context;
 
-        public UserService(IApiService _apiService,
-            IHttpContextAccessor _accessor)
+        public UserService(IApiService _api, IHttpContextAccessor _accessor)
+            :base(_api)
         {
-            apiService = _apiService;
             context = _accessor.HttpContext;
         }
 
@@ -53,6 +51,21 @@ namespace TestApp.Services.User
         {
             await context.Authentication.SignOutAsync("WeeklyDevAPIAuthentication");
             return await apiService.Get(ApiEndpoints.Logout);
+        }
+
+        public async Task<UserModel> Me()
+        {
+            var response = await apiService.Get(ApiEndpoints.UserMe);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string jsonUser = await response.Content.ReadAsStringAsync();
+                var user = JsonConvert.DeserializeObject<UserModel>(jsonUser);
+
+                return user;
+            }
+
+            return null;
         }
 
         public Task<HttpResponseMessage> Register(UserModel user)

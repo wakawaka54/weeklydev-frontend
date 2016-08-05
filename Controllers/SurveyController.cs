@@ -31,8 +31,8 @@ namespace TestApp.Controllers
         [Route("survey/")]
         public async Task<IActionResult> Survey()
         {
-            var response = await survey.GetSurvey(surveyModel);
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            surveyModel = await survey.GetSurvey();
+            if(surveyModel != null)
             {
                 return View(surveyModel);
             }
@@ -58,7 +58,7 @@ namespace TestApp.Controllers
                 var response = await survey.SetSurvey(model);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-
+                    return LocalRedirect("/");
                 }
                 else
                 {
