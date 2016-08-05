@@ -6,18 +6,11 @@ using Newtonsoft.Json;
 
 
 namespace TestApp.Models.Api
-{
+{  
     public class TeamModel
     {
-        [JsonProperty("role")]
-        public IEnumerable<RoleModel> Roles { get; set; }
-    }
-
-    public class RoleModel
-    {
-        [JsonProperty("id")]
-        public string ID { get; set; }
-
-        public string Role { get; set; }
+        public UserModel Frontend { get; set; }
+        public UserModel Backend { get; set; }
+        public UserModel Manager { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace TestApp.Services
 {
     public class ApiService : IApiService
     {
-        string defaultBasePath = "http://192.168.2.128:1337/v1/";
+        string defaultBasePath = "http://localhost:1337/v1/";
 
         ILogger<ApiService> _logger;
         IApiAuth _authentication;

@@ -32,13 +32,14 @@ namespace TestApp.Services.User
             //Check if user was authenticated and then create Identity Claims to store into an Authentication Cookie
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var definition = new { Token = "" };
+                var definition = new { Token = "", user = new UserModel() };
                 var authToken = JsonConvert.DeserializeAnonymousType(await response.Content.ReadAsStringAsync(), definition);
 
                 //Create claims and identity
                 var claims = new List<Claim>();
                 claims.Add(new Claim(ClaimTypes.Name, user.Username));
                 claims.Add(new Claim(ClaimTypes.UserData, authToken.Token));
+                claims.Add(new Claim(ClaimTypes.Sid, authToken.user.ID));
                 ClaimsIdentity identity = new ClaimsIdentity(claims, "WeeklyDevAPIAuthentication");
                 //Create authentication cookie
                 await context.Authentication.SignInAsync("WeeklyDevAPIAuthentication", new ClaimsPrincipal(identity));
