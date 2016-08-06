@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using System.Net.Http;
 
 using TestApp.Models;
+using TestApp.Models.Api.User;
 
 namespace TestApp.Services.User
 {
     public interface IUserService
     {
-        Task<HttpResponseMessage> Login(UserModel user);
+        Task<HttpResponseMessage> Login(LoginUserModel user);
         Task<HttpResponseMessage> Logout();
-        Task<HttpResponseMessage> Register(UserModel user);
+        Task<HttpResponseMessage> Register(NewUserModel user);
         Task<UserModel> Me();
+        Task<HttpResponseMessage> ChangePassword(PasswordChangeUserModel user);
     }
 }

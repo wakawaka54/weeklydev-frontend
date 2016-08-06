@@ -71,6 +71,7 @@ namespace TestApp.Services.Teams
         public Task<HttpResponseMessage> RequestJoin(RequestJoinTeamModel model)
         {
             string endpoint = ApiEndpoints.TeamJoinRequest("test");
+            return null;
         }
 
         public Task<TeamModel> Update(TeamModel model)

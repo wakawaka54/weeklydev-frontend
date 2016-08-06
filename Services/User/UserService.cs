@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using TestApp.Models;
+using TestApp.Models.Api.User;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -24,7 +25,19 @@ namespace TestApp.Services.User
             context = _accessor.HttpContext;
         }
 
-        public async Task<HttpResponseMessage> Login(UserModel user)
+        public async Task<HttpResponseMessage> ChangePassword(PasswordChangeUserModel user)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(user));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            string json = await content.ReadAsStringAsync();
+
+            var response = await apiService.Post(ApiEndpoints.PasswordChange, content);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> Login(LoginUserModel user)
         {
             HttpResponseMessage response = await apiService.Post(ApiEndpoints.Login, null,
                 x => { x.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(user.Username + ":" + user.Password))); });
@@ -69,12 +82,12 @@ namespace TestApp.Services.User
             return null;
         }
 
-        public Task<HttpResponseMessage> Register(UserModel user)
+        public Task<HttpResponseMessage> Register(NewUserModel user)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(user));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            return apiService.Post("users/new", content);
+            return apiService.Post(ApiEndpoints.Register, content);
         }
     }
 }

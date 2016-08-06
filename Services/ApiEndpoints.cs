@@ -11,6 +11,8 @@ namespace TestApp.Services
         public const string Register = "users/new";
         public const string Logout = "logout";
         public const string UserMe = "users/me";
+        public const string PasswordChange = "users/me/password";
+
         public const string Teams = "teams";
         public static Func<string, string> TeamJoinRequest = (id) => { return "teams/" + id + "/join"; };
     }

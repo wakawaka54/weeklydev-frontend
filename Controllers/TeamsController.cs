@@ -23,7 +23,7 @@ namespace TestApp.Controllers
         public async Task<IActionResult> Join(string id = null)
         {
             if(id == null) { return await All(); }
-
+            return await All();
         }
 
         [HttpGet]

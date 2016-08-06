@@ -7,7 +7,12 @@
         <span class="badge">4</span>
     </a>
     <ul class="dropdown-menu">
-        <li><a asp-controller="Survey" asp-action="Survey">Complete survey <span class="label label-primary">!</span></a></li>
+        <li><a asp-controller="Account" asp-action="Me">Account</a></li>
+        @if (Model.Survey == null)
+        {
+            <li><a asp-controller="Survey" asp-action="Survey">Complete survey<span class="label label-primary std-hor-space-sm">!</span></a></li>
+        }
+
         <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
     </ul>
 </li>

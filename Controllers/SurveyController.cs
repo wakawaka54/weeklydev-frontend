@@ -29,8 +29,11 @@ namespace TestApp.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("survey/")]
-        public async Task<IActionResult> Survey()
+        public async Task<IActionResult> Survey(bool ajax = false)
         {
+            //If survey is requested through ajax then do not display the layout
+            ViewData["ajax"] = ajax;
+
             surveyModel = await survey.GetSurvey();
             if(surveyModel != null)
             {
@@ -49,8 +52,11 @@ namespace TestApp.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Route("survey/")]
-        public async Task<IActionResult> Survey(SurveyModel model)
+        public async Task<IActionResult> Survey(SurveyModel model, bool ajax = false)
         {
+            //If survey is requested through ajax then do not display the layout
+            ViewData["ajax"] = ajax;
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using TestApp.Models.Api;
+
 using Newtonsoft.Json;
 
 namespace TestApp.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class UserModel
     {
         [JsonProperty(PropertyName = "id", NullValueHandling = NullValueHandling.Ignore)]
         public string ID { get; set; }
+
         public string Username { get; set; }
-        public string Password {get; set; }
+
         public string Email {get; set;}
 
-        [JsonIgnore]
-        public bool RememberMe {get; set;}
+        public SurveyModel Survey { get; set; }
+
+        [JsonProperty("userId")]
+        public string UserID { get; set; }
+
+        public string[] Access { get; set; }
+
+        public bool IsSearching { get; set; }
     }
 }

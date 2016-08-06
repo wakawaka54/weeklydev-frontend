@@ -1,0 +1,125 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using TestApp.Models.Api
+@model SurveyModel
+
+<h2>User Survey</h2>
+<div class="row">
+    <div class="col-md-12">
+        <section>
+            <form id="surveyForm" class="col-md-12 form-horizontal center-block" asp-controller="Survey" asp-action="Survey" method="post">
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Role" class="control-label">Select Perferred Role:</label>
+                    <div>
+                        <select asp-for="Role" class="selectpicker" data-style="btn-default" multiple>
+                            <option value="manager">Manager</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProjectManager" class="control-label">Would you like to be project manager?</label>
+                    <div>
+                        <select asp-for="ProjectManager" class="form-control">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <span asp-validation-for="ProjectManager" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SkillLevel" class="control-label">Skill Level:</label>
+                    <div>
+                        <select asp-for="SkillLevel" class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <span asp-validation-for="SkillLevel" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProjectSize" class="control-label">Skill Level:</label>
+                    <div>
+                        <select asp-for="ProjectSize" class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <span asp-validation-for="ProjectSize" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Timezone" class="control-label">Skill Level:</label>
+                    <div>
+                        <select asp-for="Timezone" class="form-control">
+                            @for (int i = -12; i <= 12; i++)
+                            {
+                                <option value="@i">@i:00 GMT</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Timezone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="pull-right">
+                        <i id="surveyCheck" class="fa fa-check survey-success" aria-hidden="true"></i>
+                        <button id="surveySubmit" type="submit" class="btn btn-primary">Submit Survey</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<!--Setup Validation-->
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse("#surveyForm");
+        $('.selectpicker').selectpicker();
+        
+        $('#surveyForm').change(function () {
+            $('#surveyCheck').hide();
+        });
+    });
+
+    $("#surveySubmit").click(function (e) {
+        e.preventDefault();
+
+        var form = $("#surveyForm");
+
+        if (form.valid()) {
+            surveyFormValid();
+        }
+
+        function surveyFormValid() {
+            $.ajax({
+                url: '/survey?ajax=true',
+                data: form.serialize(),
+                type: 'POST',
+                success: ajaxSurveySuccess,
+                error: ajaxError
+            });
+
+            function ajaxSurveySuccess(data) {
+                $('#surveyCheck').show();
+            }
+
+            function ajaxError(data) {
+                console.log(data);
+            }
+        }
+    });
+</script>
