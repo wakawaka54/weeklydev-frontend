@@ -116,7 +116,6 @@ namespace TestApp.Controllers
         //
         // GET: /Account/PasswordChange
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult PasswordChange(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -126,13 +125,12 @@ namespace TestApp.Controllers
         //
         // POST: /Account/PasswordChange
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PasswordChange(PasswordChangeUserModel model, string returnUrl = null)
         {
             var response = await user.ChangePassword(model);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return LocalRedirect(returnUrl);
             }
@@ -141,6 +139,17 @@ namespace TestApp.Controllers
                 ModelState.AddModelError(string.Empty, "Error changing passwords!");
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Confirm(string userid)
+        {
+            var response = await user.Confirm(userid);
+
+            ConfirmUserModel model = new ConfirmUserModel() { Confirmed = response.StatusCode == System.Net.HttpStatusCode.OK };
+
+            return View(model);
         }
 
         /*  //

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TestApp</title>
 
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -25,32 +28,31 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">WeeklyDev.io</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-coffee" aria-hidden="true"></i>  WeeklyDev.io</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                @if (Context.User.Identity.IsAuthenticated)
-                {
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Project" asp-action="All">Projects</a></li>
-                    </ul>
-                }
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Project" asp-action="All">Projects</a></li>
+                </ul>
                         @if (Context.User.Identity.IsAuthenticated)
                         {
-                            @await Component.InvokeAsync("UserNotifications")
+                            <ul class="nav navbar-nav navbar-right nav-cursor">
+                                @await Component.InvokeAsync("UserNotifications")
+                            </ul>
                         }
                         else
                         {
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            <ul class="nav navbar-right home-nav">
+                                <li><a asp-controller="Account" asp-action="Login" class="navbar-btn navbar-btn-primary">Login</a></li>
+                            </ul>
                         }
-                </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
     </div>
 

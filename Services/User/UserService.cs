@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using TestApp.Models;
 using TestApp.Models.Api.User;
+using TestApp.Services.Email;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -18,11 +19,13 @@ namespace TestApp.Services.User
     public class UserService : ApiServiceBase, IUserService
     {
         HttpContext context;
+        IEmailService email;
 
-        public UserService(IApiService _api, IHttpContextAccessor _accessor)
+        public UserService(IApiService _api, IEmailService _email, IHttpContextAccessor _accessor)
             :base(_api)
         {
             context = _accessor.HttpContext;
+            email = _email;
         }
 
         public async Task<HttpResponseMessage> ChangePassword(PasswordChangeUserModel user)
@@ -37,6 +40,14 @@ namespace TestApp.Services.User
             return response;
         }
 
+        public async Task<HttpResponseMessage> Confirm(string userid)
+        {
+            string endpoint = ApiEndpoints.UserConfirm(userid);
+            var response = await apiService.Get(endpoint);
+
+            return response;
+        }
+        //S1It1cmY
         public async Task<HttpResponseMessage> Login(LoginUserModel user)
         {
             HttpResponseMessage response = await apiService.Post(ApiEndpoints.Login, null,
@@ -82,12 +93,24 @@ namespace TestApp.Services.User
             return null;
         }
 
-        public Task<HttpResponseMessage> Register(NewUserModel user)
+        public async Task<HttpResponseMessage> Register(NewUserModel user)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(user));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            return apiService.Post(ApiEndpoints.Register, content);
+            var response = await apiService.Post(ApiEndpoints.Register, content);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var userModel = JsonConvert.DeserializeObject<NewUserSuccessModel>(await response.Content.ReadAsStringAsync());
+                var subject = "Welcome To WeeklyDev.io";
+                var message = $"Confirm this email by visiting http:/localhost:{5000}/Account/Confirm?userid={userModel.User.UserID}";
+
+                email.SendMail(userModel.User.Username, userModel.User.Email, subject, message);
+            }
+
+            return response;
         }
     }
 }

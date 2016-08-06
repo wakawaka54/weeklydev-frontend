@@ -5,23 +5,23 @@
 }
 
 @using TestApp.Models.Api
-@model SubmissionModel
+@model ProjectModel
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 center-col">
         <section>
             <form asp-controller="Project" asp-action="New" asp-route-returnurl="/" method="post" class="form-horizontal">
                 <h4>Add a new project to our project ideas!</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Team" class="col-md-2 control-label"></label>
+                    <label asp-for="Title" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="Team" class="form-control" />
-                        <span asp-validation-for="Team" class="text-danger"></span>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                 </div>
-                <!--><div class="form-group">
+                <div class="form-group">
                     <label asp-for="Description" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
                         <textarea asp-for="Description" class="form-control"></textarea>
@@ -32,7 +32,7 @@
                     <div class="col-md-offset-2 col-md-10">
                         <button type="submit" class="btn btn-default">Create</button>
                     </div>
-                </div>-->
+                </div>
             </form>
         </section>
     </div>

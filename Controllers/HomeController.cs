@@ -4,10 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using TestApp.Services.Email;
+
 namespace TestApp.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(IEmailService email)
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();

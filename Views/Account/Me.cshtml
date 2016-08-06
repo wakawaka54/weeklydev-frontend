@@ -7,8 +7,6 @@
     ViewData["Title"] = "Account Info";
 }
 
-<h2>@ViewData["Title"]</h2>
-
 <div id="surveyModal" class="modal fade" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -27,39 +25,54 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-8">
-        <div>
-            <img class="img-circle user-profile-img" alt="profile-image" src="~/images/user/default.jpg" />
+<section>
+    <div class="row">
+        <div class="col-md-8 center-col">
+            <header>
+                <h2>@ViewData["Title"]</h2>
+            </header>
+            <div>
+                <img class="img-circle user-profile-img" alt="profile-image" src="~/images/user/default.jpg" />
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Username:</td>
+                        <td>@Model.Username</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>
+                            @Model.Email
+                            @if(Model.Verified == "true")
+                            {
+                                <span class="label label-success">Verified!</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Email Not Verified</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><a class="btn btn-primary" asp-controller="Account" asp-action="PasswordChange" asp-route-returnurl="/Account/Me">Change Password</a></td>
+                    </tr>
+                    <tr>
+                        <td>Survey:</td>
+                        <td>
+                            @if (Model.Survey == null)
+                            {
+                                <a id="survey" data-toggle="modal" data-target="#surveyModal" class="btn btn-danger">Complete Survey</a>
+                            }
+                            else
+                            {
+                                <a id="survey" data-toggle="modal" data-target="#surveyModal" class="btn btn-primary">View Survey</a>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>Username:</td>
-                    <td>@Model.Username</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>@Model.Email</td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><a class="btn btn-primary" asp-controller="Account" asp-action="PasswordChange" asp-route-returnurl="Account/Me">Change Password</a></td>
-                </tr>
-                <tr>
-                    <td>Survey:</td>
-                    <td>
-                        @if (Model.Survey == null)
-                        {
-                            <a id="survey" data-toggle="modal" data-target="#surveyModal" class="btn btn-danger">Complete Survey</a>
-                        }
-                        else
-                        {
-                            <a id="survey" data-toggle="modal" data-target="#surveyModal" class="btn btn-primary">View Survey</a>
-                        }
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-</div>
+</section>

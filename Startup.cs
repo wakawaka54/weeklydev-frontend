@@ -19,6 +19,7 @@ using TestApp.Services.Survey;
 using TestApp.Services.Projects;
 using TestApp.Services.Teams;
 using TestApp.Services.Submissions;
+using TestApp.Services.Email;
 
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -61,6 +62,7 @@ namespace TestApp
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<ISubmissionService, SubmissionService>();
             services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }

@@ -1,1 +1,163 @@
-body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.std-hor-space-sm{padding-left:5px;padding-right:5px}.navbar{margin-left:30px;margin-right:30px}.navbar-nav li{cursor:pointer}.user-profile-img{max-width:100px;height:auto;padding-top:15px;padding-bottom:15px}.survey-success{padding-right:5px}input,select,textarea{max-width:280px}.carousel-caption p{font-size:20px;line-height:1.4}.btn-bracketed::before{display:inline-block;content:"[";padding-right:.5em}.btn-bracketed::after{display:inline-block;content:"]";padding-left:.5em}.carousel-inner .item img[src$=".svg"]{width:100%}@media screen and (max-width:767px){.carousel-caption{display:none}}
+/*
+    Color Scheme:
+
+    DARK THEME
+    background-color: #1A1B28
+    background-second-color: #2C2E44
+    background-color: #2B4162
+    background-color: #385F71
+    background-color: #F5F0F6
+
+    background-color: #EFEFEF
+    background-second-color: #F7F7F7
+*/
+
+body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    background-color: #F7F7F7;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+}
+
+/*
+    ************************ WeeklyDev.IO Styles, Convert to SASS or LESS Seperate Style Sheets per Site Section
+*/
+
+/*
+    Site Standard Styles
+*/
+
+.std-hor-space-sm {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.center-col {
+    float: none;
+    margin: 0 auto;
+}
+
+/*
+    Navigation Styles
+*/
+
+.navbar {
+    padding-top: 0px;
+    padding-left:20vw;
+    padding-right:15vw;
+    margin-bottom: 0px;
+    border: none;
+    height: 50px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #EFEFEF;
+}
+
+.home-nav > li > a {
+    padding: 5px 25px 5px 25px;
+    margin-top: 5px;
+}
+
+/*Can't overwrite padding because bootstrap is more specific*/
+.navbar-btn {
+    margin: 0 auto;
+    vertical-align: middle;
+    border: solid;
+    border-width: 2px;
+    color: black;
+    font-size: 15px;
+    padding-left: 50px;
+}
+
+.navbar-btn-primary {
+    border-color: #2B4162;
+    color: #2B4162;
+}
+
+.navbar-btn-primary:hover {
+    border-color: #3D5D8C;
+    color: #3D5D8C;
+}
+
+.nav-cursor > li > a {
+    cursor: pointer;
+}
+
+/*
+    Home Styles
+*/
+
+.home-primary {
+    padd
+    background-color: #EFEFEF;
+    height: 500px;
+}
+
+.home-secondary {
+    background-color: #F7F7F7;
+    height:700px;
+}
+
+/*
+    User Styles
+*/
+
+.user-profile-img {
+    max-width: 100px;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/*
+    Survey Styles
+*/
+
+.survey-success {
+    padding-right:5px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display:inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+.btn-bracketed::after {
+    display:inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"]
+{
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
+}

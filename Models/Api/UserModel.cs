@@ -26,5 +26,7 @@ namespace TestApp.Models
         public string[] Access { get; set; }
 
         public bool IsSearching { get; set; }
+
+        public string Verified { get; set; }
     }
 }
