@@ -152,6 +152,13 @@ namespace TestApp.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("/dashboard")]
+        public async Task<IActionResult> Dashboard()
+        {
+            return View();
+        }
+
         /*  //
           // GET: /Account/Register
           [HttpGet]

@@ -2,22 +2,46 @@
     ViewData["Title"] = "WeeklyDev IO";
 }
 
-<div class="row home-secondary">
+<div class="row home-secondary home-first-wrap">
     <div class="center-col center-text">
-        <img src="~/images/home/laptop.png" />
+        <img class="home-first-img" src="~/images/home/laptop.png" />
     </div>
     <div class="center-col center-text">
-        <p class="font-l">Explore!</p>
+        <p class="font-ml">Code, hang out, drink coffee.</p>
     </div>
 </div>
 
 <div class="row home-primary">
-
+    <div class="home-info-section">
+            <div class="home-well-wrap col-md-2">
+                <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+                <hr/>
+                <p class="home-well-title font-m">Team</p>
+                <p class="home-well-description font-ms">
+                    Blah blah we work on teams, teams are great, you'll love it!
+                </p>
+            </div>
+        <div class="home-well-wrap col-md-2">
+            <i class="fa fa-code fa-3x" aria-hidden="true"></i>
+            <hr/>
+            <p class="home-well-title font-m">Code</p>
+            <p class="home-well-description font-ms">
+                Blah blah, code what you love not what you must.
+            </p>
+        </div>
+        <div class="home-well-wrap col-md-2">
+            <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
+            <hr/>
+            <p class="home-well-title font-m">Learn</p>
+            <p class="home-well-description font-ms">
+                Who said you can't do back end?
+            </p>
+        </div>
+    </div>
 </div>
-
-<h1>HOME</h1>
-
-@if (Context.User.Identity.IsAuthenticated)
-{
-    <p>Welcome @Context.User.Identity.Name</p>
-}
+<div class="row home-secondary">
+    <div class="home-signup-section">
+        <p class="font-m">Sign up now to get started!</p>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Sign Up!</a>
+    </div>
+</div>

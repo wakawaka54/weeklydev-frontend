@@ -28,5 +28,14 @@ namespace TestApp.Models
         public bool IsSearching { get; set; }
 
         public string Verified { get; set; }
+
+        public int Notifications()
+        {
+            int notifications = 0;
+            if(Survey == null) { notifications++; }
+            if(Verified != "true") { notifications++; }
+
+            return notifications;
+        }
     }
 }

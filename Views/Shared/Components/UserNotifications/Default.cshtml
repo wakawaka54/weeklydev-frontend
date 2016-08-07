@@ -4,15 +4,27 @@
 <li class="dropdown">
     <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         @Model.Username
-        <span class="badge">4</span>
+        @{
+            var notifications = Model.Notifications();
+            if (notifications > 0)
+            {
+                <span class="badge">@notifications.ToString()</span>
+            }
+        }
     </a>
     <ul class="dropdown-menu">
-        <li><a asp-controller="Account" asp-action="Me">Account</a></li>
+        <li>
+            <a asp-controller="Account" asp-action="Me">Account
+                @if (Model.Verified != "true")
+                {
+                    <span class="label label-danger font-xs user-notification-label">!</span>
+                }
+            </a>
+        </li>
         @if (Model.Survey == null)
         {
-            <li><a asp-controller="Survey" asp-action="Survey">Complete survey<span class="label label-primary std-hor-space-sm">!</span></a></li>
+            <li><a asp-controller="Survey" asp-action="Survey">Survey<span class="label label-primary user-notification-label font-xs">!</span></a></li>
         }
-
         <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
     </ul>
 </li>
