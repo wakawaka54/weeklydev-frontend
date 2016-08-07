@@ -18,11 +18,11 @@ namespace TestApp.Services.Authentication
             context = accessor.HttpContext;
         }
 
-        public void ApplyAuthentication(HttpClient client)
+        public void ApplyAuthentication(HttpRequestMessage message)
         {
             if (context.User.Identity.IsAuthenticated)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", context.User.FindFirstValue(ClaimTypes.UserData));
+                message.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", context.User.FindFirstValue(ClaimTypes.UserData));
             }
         }
     }

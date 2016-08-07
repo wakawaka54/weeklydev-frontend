@@ -29,6 +29,10 @@ namespace TestApp.Models
 
         public string Verified { get; set; }
 
+        //TODO: Not populating with TeamModel, only getting shortid
+        [JsonProperty("team")]
+        public IEnumerable<string> Teams { get; set; }
+
         public int Notifications()
         {
             int notifications = 0;

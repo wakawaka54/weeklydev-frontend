@@ -18,6 +18,8 @@ namespace TestApp.Services.User
 {
     public class UserService : ApiServiceBase, IUserService
     {
+        //Replace this with a real cache someday
+        static UserModel _cacheUser;
         HttpContext context;
         IEmailService email;
 
@@ -47,6 +49,24 @@ namespace TestApp.Services.User
 
             return response;
         }
+
+        public async Task<HttpResponseMessage> Delete()
+        {
+            var user = new UserModel();
+            user.UserID = context.User.FindFirstValue(ClaimTypes.PrimarySid);
+
+            string endpoint = ApiEndpoints.UserDelete(user.UserID);
+
+            var response = await apiService.Delete(endpoint);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                await context.Authentication.SignOutAsync("WeeklyDevAPIAuthentication");
+            }
+
+            return response;
+        }
+
         //S1It1cmY
         public async Task<HttpResponseMessage> Login(LoginUserModel user)
         {
@@ -64,6 +84,7 @@ namespace TestApp.Services.User
                 claims.Add(new Claim(ClaimTypes.Name, user.Username));
                 claims.Add(new Claim(ClaimTypes.UserData, authToken.Token));
                 claims.Add(new Claim(ClaimTypes.Sid, authToken.user.ID));
+                claims.Add(new Claim(ClaimTypes.PrimarySid, authToken.user.UserID));
                 ClaimsIdentity identity = new ClaimsIdentity(claims, "WeeklyDevAPIAuthentication");
                 //Create authentication cookie
                 await context.Authentication.SignInAsync("WeeklyDevAPIAuthentication", new ClaimsPrincipal(identity));
@@ -90,6 +111,11 @@ namespace TestApp.Services.User
                 return user;
             }
 
+            return null;
+        }
+
+        public Task<HttpResponseMessage> Recover(RecoverUseModel user)
+        {
             return null;
         }
 

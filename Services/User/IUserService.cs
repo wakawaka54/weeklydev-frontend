@@ -17,5 +17,7 @@ namespace TestApp.Services.User
         Task<UserModel> Me();
         Task<HttpResponseMessage> ChangePassword(PasswordChangeUserModel user);
         Task<HttpResponseMessage> Confirm(string userid);
+        Task<HttpResponseMessage> Delete();
+        Task<HttpResponseMessage> Recover(RecoverUseModel user);
     }
 }

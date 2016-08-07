@@ -12,7 +12,9 @@ namespace TestApp.Services
         public const string Logout = "logout";
         public const string UserMe = "users/me";
         public const string PasswordChange = "users/me/password";
+        public const string UserRecover = "users/passwordreset";
         public static Func<string, string> UserConfirm = (id) => { return $"users/confirm/{id}"; };
+        public static Func<string, string> UserDelete = (id) => { return $"users/{id}"; };
 
         public const string Teams = "teams";
         public static Func<string, string> TeamJoinRequest = (id) => { return $"teams/{id}/join"; };

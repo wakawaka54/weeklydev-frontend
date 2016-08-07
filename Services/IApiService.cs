@@ -12,5 +12,6 @@ namespace TestApp.Services
     {
         Task<HttpResponseMessage> Post(string endpoint, StringContent content, Action<HttpRequestHeaders> headers = null);
         Task<HttpResponseMessage> Get(string endpoint, Action<HttpRequestHeaders> headers = null);
+        Task<HttpResponseMessage> Delete(string endpoint, Action<HttpRequestHeaders> headers = null);
     }
 }

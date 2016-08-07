@@ -15,7 +15,7 @@ namespace TestApp.Services
 {
     public class ApiService : IApiService
     {
-        string defaultBasePath = "http://192.168.2.128:1337/v1/";
+        string defaultBasePath = "http://104.236.48.115:1337/v1/";
 
         ILogger<ApiService> _logger;
         IApiAuth _authentication;
@@ -38,7 +38,7 @@ namespace TestApp.Services
 
                 headers?.Invoke(message.Headers);
 
-                _authentication.ApplyAuthentication(client);
+                _authentication.ApplyAuthentication(message);
 
                 message.Content = content;
 
@@ -59,7 +59,26 @@ namespace TestApp.Services
 
                 headers?.Invoke(message.Headers);
 
-                _authentication.ApplyAuthentication(client);
+                _authentication.ApplyAuthentication(message);
+
+                response = await client.SendAsync(message);
+            }
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> Delete(string endpoint, Action<HttpRequestHeaders> headers = null)
+        {
+            HttpResponseMessage response;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(defaultBasePath);
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Delete, endpoint);
+
+                headers?.Invoke(message.Headers);
+
+                _authentication.ApplyAuthentication(message);
 
                 response = await client.SendAsync(message);
             }

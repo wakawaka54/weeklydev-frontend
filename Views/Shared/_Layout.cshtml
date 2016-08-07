@@ -53,6 +53,10 @@
         </div>
     </nav>
     <div class="container-fluid body-content">
+
+        @if(TempData["Message"] != null)
+        { @Html.AddApplicationMessage(JsonConvert.DeserializeObject<ApplicationMessage>((string)TempData["Message"])) }
+
         @RenderBody()
     </div>
     <footer class="site-footer">

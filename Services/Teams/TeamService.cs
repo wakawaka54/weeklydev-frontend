@@ -29,14 +29,7 @@ namespace TestApp.Services.Teams
 
         public Task<HttpResponseMessage> Create(NewTeamModel model)
         {
-            RoleModel role = new RoleModel();
-            role.ID = context.User.FindFirstValue(ClaimTypes.Sid);
-            role.Role = "frontend";
-
-            NewTeamModel m = new NewTeamModel();
-            m.Roles = new List<RoleModel>() { role };
-
-            string json = JsonConvert.SerializeObject(m);
+            string json = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(json);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");

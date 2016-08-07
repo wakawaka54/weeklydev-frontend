@@ -1,3 +1,5 @@
+@model UserModel
+
 @{
     ViewData["Title"] = "WeeklyDev IO";
 }
@@ -6,9 +8,37 @@
     <h2>Welcome to your dashboard</h2>
     @Context.User.Identity.Name
 </div>
-
+<br/>
 <div class="col-md-8 center-col">
-    <h3>Teams</h3>
+    <p>
+        <span class="font-m">Teams</span>
+        <a class="btn btn-success pull-right" asp-controller="Teams" asp-action="New">+</a>
+    </p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Project</th>
+                <th>Members</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var team in Model.Teams)
+            {
+                <tr>
+                    <td>
+                        @team
+                    </td>
+                    <td>
+                        Not populating this :c
+                    </td>
+                    <td>
+                        Not populating this :c
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div class="col-md-8 center-col">

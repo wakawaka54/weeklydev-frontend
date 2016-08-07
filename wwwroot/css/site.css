@@ -78,6 +78,10 @@ body {
     font-size: 8px;
 }
 
+.site-alert {
+    width:50vw;
+}
+
 /*
     Navigation Styles
 */

@@ -9,6 +9,6 @@ namespace TestApp.Services.Authentication
 {
     public interface IApiAuth
     {
-        void ApplyAuthentication(HttpClient client);
+        void ApplyAuthentication(HttpRequestMessage message);
     }
 }

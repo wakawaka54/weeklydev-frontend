@@ -19,26 +19,26 @@
                 <div class="form-group">
                     <label asp-for="Username" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="Username" class="form-control" />
+                        <input asp-for="Username" class="form-control" tabindex="1" />
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Password" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="Password" class="form-control" />
+                        <input asp-for="Password" type="password" class="form-control" tabindex="2" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
                 <p class="col-lg-offset-2">
-                    <a asp-action="Register">Register as a new user?</a>
+                    <a asp-action="Register" tabindex="4">Register as a new user?</a>
                 </p>
                 <p class="col-lg-offset-2">
-                    <a asp-action="ForgotPassword">Forgot your password?</a>
+                    <a asp-action="ForgotPassword" tabindex="5">Forgot your password?</a>
                 </p>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-default">Log in</button>
+                        <button type="submit" class="btn btn-default" tabindex="3">Log in</button>
                     </div>
                 </div>
             </form>
