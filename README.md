@@ -1,3 +1,5 @@
+[Running application](http://104.236.48.115:1400/ "WeeklyDev-Frontend")
+
 #WeeklyDev.io .NET Core Front End
 
 ##Quick Start - Installation & Dev Environment Setup
