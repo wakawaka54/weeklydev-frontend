@@ -60,7 +60,7 @@ namespace TestApp.Controllers
                 if(response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     if(returnUrl == null) { returnUrl = "All"; }
-                    return RedirectToAction(returnUrl);
+                    return LocalRedirect(returnUrl);
                 }
                 else
                 {

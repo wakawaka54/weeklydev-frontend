@@ -37,9 +37,11 @@ namespace TestApp.Services.Teams
             return apiService.Post("teams", content);
         }
 
-        public Task<HttpResponseMessage> Delete(TeamModel model)
+        public async Task<HttpResponseMessage> Delete(TeamModel model)
         {
-            throw new NotImplementedException();
+            var response = await apiService.Delete(ApiEndpoints.TeamDelete(model.ID));
+
+            return response;
         }
 
         public async Task<IEnumerable<TeamModel>> GetAll()

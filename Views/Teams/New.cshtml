@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-8">
         <section>
-            <form asp-controller="Teams" asp-action="New" asp-route-returnurl="/all" method="post" class="form-horizontal">
+            <form asp-controller="Teams" asp-action="New" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
                 <h4>Create a new team and invite other users!</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
