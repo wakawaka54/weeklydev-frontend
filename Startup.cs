@@ -38,8 +38,10 @@ namespace TestApp
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                //add user secrets here?
             }
+
+            builder.AddUserSecrets();
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
