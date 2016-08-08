@@ -49,6 +49,7 @@ Configuration for this project is done in following files **`project.json`**, **
 * Startup(...) - Configuration is built here, add any new configuration files here.
 * ConfigureServices(...) - Some services need to be pre-configured which is what happens here. *Dependency Injection* mapping happens here.
 * Configure(...) - WeeklyDevApiAuthentication is setup here and JsonConvert default settings are assigned here. Routes are assigned here.
+
 ####`Program.cs`
 * Main(...) - starting point of the application, creates and configures Server and adds `Startup.cs` file along with retreives config files.
 
