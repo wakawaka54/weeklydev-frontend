@@ -7,6 +7,6 @@ namespace TestApp.Infrastructure.Configuration
 {
     public class ApiServiceOptions
     {
-        public string DefaultApiPath { get; set; }
+        public string ApiAddress { get; set; }
     }
 }

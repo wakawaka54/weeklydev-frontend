@@ -26,7 +26,7 @@ namespace TestApp.Services
             IApiAuth auth,
             IOptions<ApiServiceOptions> optionsAccess)
         {
-            defaultBasePath = optionsAccess.Value.DefaultApiPath;
+            defaultBasePath = optionsAccess.Value.ApiAddress;
             _logger = logger;
             _authentication = auth;
         }
