@@ -7,22 +7,26 @@ using System.Diagnostics;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 using TestApp.Services.Authentication;
+using TestApp.Infrastructure.Configuration;
 using System.Net.Http.Headers;
 
 namespace TestApp.Services
 {
     public class ApiService : IApiService
-    {
+    { 
         string defaultBasePath = "http://104.236.48.115:1337/v1/";
 
         ILogger<ApiService> _logger;
         IApiAuth _authentication;
 
         public ApiService(ILogger<ApiService> logger,
-            IApiAuth auth)
+            IApiAuth auth,
+            IOptions<ApiServiceOptions> optionsAccess)
         {
+            defaultBasePath = optionsAccess.Value.DefaultApiPath;
             _logger = logger;
             _authentication = auth;
         }

@@ -21,6 +21,8 @@ using TestApp.Services.Teams;
 using TestApp.Services.Submissions;
 using TestApp.Services.Email;
 
+using TestApp.Infrastructure.Configuration;
+
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -50,6 +52,9 @@ namespace TestApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<ApiServiceOptions>(Configuration);
+
             services.AddSession();
             services.AddMvc();
 

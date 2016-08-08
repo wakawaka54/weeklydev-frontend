@@ -22,7 +22,7 @@ namespace TestApp.Controllers
         private IUserService user;
 
         public AccountController(IUserService _user)
-        {
+        {      
             user = _user;
         }
 
@@ -103,7 +103,8 @@ namespace TestApp.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Error creating new user");
+                //ModelState.AddModelError(string.Empty, "Error creating new user");
+                ModelState.AddModelError(string.Empty, await response.Content.ReadAsStringAsync());
                 return View(model);
             }
         }
