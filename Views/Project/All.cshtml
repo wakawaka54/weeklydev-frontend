@@ -18,6 +18,9 @@
                     <th>Title</th>
                     <th>Description</th>
                     <th>Deadline</th>
+                    <th>Creator</th>
+                    <th>Votes</th>
+                    <th>Tags</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +33,18 @@
                         <td>@project.Description</td>
                         <td>
                             @project.Deadline.ToString("MMMM dd yyyy")
+                        </td>
+                        <td>
+                            @project.Creator.Username
+                        </td>
+                        <td>
+                            @project.Votes.ToString();
+                        </td>
+                        <td>
+                            @foreach(string tag in project.Tags)
+                            {
+                                <span class="label label-info">@tag</span>
+                            }
                         </td>
                     </tr>
                 }
