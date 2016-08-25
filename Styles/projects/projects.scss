@@ -1,0 +1,50 @@
+﻿//@import "../wwwroot/lib/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+@import "../variables.scss";
+
+.project-well {
+
+}
+
+.project-vote {
+    float:left;
+    height: 50px;
+    text-align:center;
+}
+
+.project-creator {
+    font-size: $font-xs;
+    margin-top:-5px;
+}
+
+.project-info {
+    margin-left: 15px;
+    display:inline-block;
+}
+
+.project-title {
+    font-size: $font-m;
+}
+
+.project-description {
+    font-size: $font-s;
+    margin-top: 5px;
+}
+
+.votes {
+    margin-top:5px;
+    margin-bottom:5px;
+    font-weight:700;
+}
+
+.upvote {
+    color: black;
+}
+
+.downvote {
+    color: black;
+}
+
+.voted {
+    color: salmon;
+}

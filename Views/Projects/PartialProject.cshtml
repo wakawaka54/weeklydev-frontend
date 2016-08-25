@@ -1,0 +1,64 @@
+﻿@model TestApp.Models.Api.ProjectModel
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="col-md-11">
+    <div class="well well-sm col-md-11 project-well">
+        <div class="project-vote">
+            @{ 
+                string upvoted = (Model.Upvotes.Contains(User.FindFirst(System.Security.Claims.ClaimTypes.Sid).Value)) ? "voted" : "";
+                string downvoted = (Model.Downvotes.Contains(User.FindFirst(System.Security.Claims.ClaimTypes.Sid).Value)) ? "voted" : "";
+            }
+            <div>
+                <a id="upvote-@Model.ID" asp-controller="Projects" asp-action="Upvote" asp-route-projectId="@Model.ID"
+                   data-ajax="true" data-ajax-method="GET" data-ajax-success="upvoteComplete('@Model.ID')">
+                    <i class="fa fa-chevron-circle-up upvote @upvoted" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div id="votes-@Model.ID" class="votes">@Model.Votes.ToString()</div>
+            <div>
+                <a id="downvote-@Model.ID" asp-controller="Projects" asp-action="Downvote" asp-route-projectId="@Model.ID"
+                   data-ajax="true" data-ajax-method="GET" data-ajax-success="downvoteComplete('@Model.ID')">
+                    <i class="fa fa-chevron-circle-down downvote @downvoted" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="project-info">
+            <div class="project-title">@Model.Title</div>
+            <user class="project-creator" data-username="@Model.Creator.Username"></user>
+            <div class="project-description">@Model.Description</div>
+            <p>
+                @foreach (string tag in Model.Tags)
+                {
+                    <span class="label label-primary">@tag</span>
+                }
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+//TODO - ADD ERROR HANDLING
+    function upvoteComplete(id)
+    {
+        $(`#upvote-${id} > i`).addClass('voted');
+        $(`#downvote-${id} > i`).removeClass('voted');
+        let votes = parseInt($(`#votes-${id}`).text());
+        $(`#votes-${id}`).text(votes + 1);
+        console.log(`#upvote-${id}`);
+    }
+
+    function downvoteComplete(id)
+    {
+        console.log(`#downvote-${id}`);
+        $(`#upvote-${id} > i`).removeClass('voted');
+        $(`#downvote-${id} > i`).addClass('voted');
+        let votes = parseInt($(`#votes-${id}`).text());
+        $(`#votes-${id}`).text(votes - 1);
+    }
+</script>

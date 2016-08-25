@@ -19,5 +19,8 @@ namespace TestApp.Services
         public const string Teams = "teams";
         public static Func<string, string> TeamJoinRequest = (id) => { return $"teams/{id}/join"; };
         public static Func<string, string> TeamDelete = (id) => { return $"teams/{id}"; };
+
+        public static Func<string, string> ProjectUpvote = (id) => { return $"projects/{id}/upvote"; };
+        public static Func<string, string> ProjectDownvote = (id) => { return $"projects/{id}/downvote"; };
     }
 }

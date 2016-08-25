@@ -22,5 +22,7 @@ namespace TestApp.Models.Api
         public DateTime Deadline { get; set; }
         public string[] Tags { get; set; }
         public int Votes { get; set; }
+        public string[] Upvotes { get; set; }
+        public string[] Downvotes { get; set; }
     }
 }

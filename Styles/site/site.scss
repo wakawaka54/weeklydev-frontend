@@ -1,0 +1,100 @@
+﻿@import "../variables.scss";
+
+html {
+    font-size: $base-fontsize;
+    position:relative;
+}
+
+body {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: $background-color;
+    height: 100%;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+}
+
+.std-hor-space-sm {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.center-col {
+    float: none;
+    margin: 0 auto;
+}
+
+.center-text {
+    text-align:center;
+}
+
+.font-l {
+    font-size: $font-l;
+}
+
+.font-ml {
+    font-size: $font-ml;
+}
+
+.font-m {
+    font-size: $font-m;
+}
+
+.font-ms {
+    font-size: $font-ms;
+}
+
+.font-s {
+    font-size: $font-s;
+}
+
+.font-xs {
+    font-size: $font-xs;
+}
+
+.survey-success {
+    padding-right:5px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display:inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+.btn-bracketed::after {
+    display:inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"]
+{
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
+}

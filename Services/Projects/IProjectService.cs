@@ -13,5 +13,7 @@ namespace TestApp.Services.Projects
         Task<IEnumerable<ProjectModel>> GetAll();
         Task<HttpResponseMessage> Create(ProjectModel model);
         Task<ProjectModel> GetByID(ProjectModel model);
+        Task<HttpResponseMessage> Upvote(string projectId);
+        Task<HttpResponseMessage> Downvote(string projectId);
     }
 }

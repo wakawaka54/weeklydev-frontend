@@ -9,11 +9,11 @@ using TestApp.Models.Api;
 
 namespace TestApp.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectsController : Controller
     {
         IProjectService projectService;
 
-        public ProjectController(IProjectService _projectService)
+        public ProjectsController(IProjectService _projectService)
         {
             projectService = _projectService;
         }
@@ -50,6 +50,36 @@ namespace TestApp.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Upvote(string projectId)
+        {
+            var response = await projectService.Upvote(projectId);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Downvote(string projectId)
+        {
+            var response = await projectService.Downvote(projectId);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

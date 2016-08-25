@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "gulp": "3.8.11",
+    "gulp-less": "3.0.2",
+    "gulp-ruby-sass": "^2.1.0",
+    "rimraf": "2.3.2",
+    "gulp-uncss": "1.0.6"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wakawaka54/weeklydev-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wakawaka54/weeklydev-frontend/issues"
+  },
+  "homepage": "https://github.com/wakawaka54/weeklydev-frontend"
+}

@@ -25,6 +25,12 @@ namespace TestApp.Services.Projects
             return apiService.Post("projects", content);
         }
 
+        public async Task<HttpResponseMessage> Downvote(string projectId)
+        {
+            var response = await apiService.Post(ApiEndpoints.ProjectDownvote(projectId), new StringContent(String.Empty));
+            return response;
+        }
+
         public async Task<IEnumerable<ProjectModel>> GetAll()
         {
             var projects = new List<ProjectModel>();
@@ -49,6 +55,12 @@ namespace TestApp.Services.Projects
             }
 
             return project;
+        }
+
+        public async Task<HttpResponseMessage> Upvote(string projectId)
+        {
+            var response = await apiService.Post(ApiEndpoints.ProjectUpvote(projectId), new StringContent(String.Empty));
+            return response;
         }
     }
 }
