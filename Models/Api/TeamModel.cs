@@ -9,11 +9,12 @@ namespace TestApp.Models.Api
 {  
     public class TeamModel
     {
-        [JsonProperty(PropertyName = "id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ID { get; set; }
-
-        public UserModel Frontend { get; set; }
-        public UserModel Backend { get; set; }
         public UserModel Manager { get; set; }
+        public string Name { get; set; }
+        public ProjectModel Project { get; set; }
+        public DateTime Created { get; set; }
+        public bool IsActive { get; set; }
     }
 }

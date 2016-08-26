@@ -18,7 +18,7 @@ namespace TestApp.Controllers
             projectService = _projectService;
         }
 
-        [HttpGet]
+        [HttpGet("projects")]
         public async Task<IActionResult> All()
         {
             var projects = await projectService.GetAll();

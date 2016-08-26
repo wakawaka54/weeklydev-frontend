@@ -4,17 +4,41 @@
 @using TestApp.Models.Api
 @model IEnumerable<ProjectModel>
 
-<div class="row">
+<div class="row project-filters">
     <div class="col-md-8 center-col">
-        <a class="pull-right" href="New">Add</a>
+        <select class="btn-link pull-left">
+            <option value="top">Top</option>
+            <option value="new">New</option>
+        </select>
+        <div class="btn-link pull-right" data-toggle="collapse" data-target="#search">Advanced Search</div>
+    </div>
+    <div class="input-group">
+        <input name="search" placeholder="Search projects" class="form-control" />
+        <span class="input-group-addon">
+            test
+        </span>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-10 center-col">
+<div id="search" class="row collapse project-search">
+    <div class="col-md-8 center-col">
+        <form>
+                <div class="input-group">
+                    <input name="search" placeholder="Search projects" class="form-control" />
+                    <span class="input-group-addon">
+                        test
+                    </span>
+                </div>
+            <div class="form-group">
+                <input name="tags" placeholder="Tags" type="text" data-role="tagsinput" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row project-list">
+    <div class="col-md-8 center-col">
         @foreach (ProjectModel project in Model)
         {
-            @await Html.PartialAsync("PartialProject", project);
+            @await Html.PartialAsync("Partials/ProjectWell", project);
         }
     </div>
 </div>

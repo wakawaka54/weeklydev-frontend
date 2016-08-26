@@ -26,6 +26,9 @@
 
     <!-- Optional theme 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+    <!-- Bootstrap Tags-->
+    <link rel="stylesheet" href="~/lib/bootstrap-tags/bootstrap-tagsinput.css" >
 </head>
 
 <body>
@@ -54,7 +57,6 @@
         </div>
     </nav>
     <div class="container-fluid body-content">
-
         @if(TempData["Message"] != null)
         { @Html.AddApplicationMessage(JsonConvert.DeserializeObject<ApplicationMessage>((string)TempData["Message"])) }
 
@@ -106,6 +108,9 @@
     
     <!-- Bootstrap Select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+    <!-- Bootstrap Tags-->
+    <script src="~/lib/bootstrap-tags/bootstrap-tagsinput.js"></script>
 
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 

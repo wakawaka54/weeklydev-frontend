@@ -50,12 +50,6 @@ namespace TestApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                model = new NewTeamModel();
-                model.Roles = new List<RoleModel>()
-                {
-                    new RoleModel() { ID =  HttpContext.User.FindFirstValue(ClaimTypes.PrimarySid), Role = "frontend" }
-                };
-
                 var response = await teamService.Create(model);
                 if(response.StatusCode == System.Net.HttpStatusCode.OK)
                 {

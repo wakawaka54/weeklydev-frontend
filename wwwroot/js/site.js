@@ -21,3 +21,24 @@ $(function () {
         }
     });
 });
+
+//ProjectWell
+//TODO - ADD ERROR HANDLING
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+function upvoteComplete(id) {
+    $(`#upvote-${id} > i`).addClass('voted');
+    $(`#downvote-${id} > i`).removeClass('voted');
+    let votes = parseInt($(`#votes-${id}`).text());
+    $(`#votes-${id}`).text(votes + 1);
+    console.log(`#upvote-${id}`);
+}
+
+function downvoteComplete(id) {
+    console.log(`#downvote-${id}`);
+    $(`#upvote-${id} > i`).removeClass('voted');
+    $(`#downvote-${id} > i`).addClass('voted');
+    let votes = parseInt($(`#votes-${id}`).text());
+    $(`#votes-${id}`).text(votes - 1);
+}

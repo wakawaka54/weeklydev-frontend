@@ -12,15 +12,30 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Deadline</th>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Members</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (TeamModel project in Model)
+        @foreach (TeamModel team in Model)
         {
-
+            <tr>
+                <td>
+                    @team.Name
+                </td>
+                <td>
+                    @if(team.Project != null)
+                    {
+                        @team.Project.Title
+                    }
+                </td>
+                <td>
+                   <p>Manager @Html.Partial("Partials/UserIcon", team.Manager)</p>
+                   <p>Frontend @Html.Partial("Partials/UserIcon", team.Manager)</p>
+                   <p>Backend @Html.Partial("Partials/UserIcon", team.Manager)</p>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -6,8 +6,7 @@
 @{
 }
 
-<div class="col-md-11">
-    <div class="well well-sm col-md-11 project-well">
+    <div class="well well-sm col-md-12 project-well">
         <div class="project-vote">
             @{ 
                 string upvoted = (Model.Upvotes.Contains(User.FindFirst(System.Security.Claims.ClaimTypes.Sid).Value)) ? "voted" : "";
@@ -30,7 +29,7 @@
         </div>
         <div class="project-info">
             <div class="project-title">@Model.Title</div>
-            <user class="project-creator" data-username="@Model.Creator.Username"></user>
+            @Html.Partial("Partials/UserIcon", Model.Creator)
             <div class="project-description">@Model.Description</div>
             <p>
                 @foreach (string tag in Model.Tags)
@@ -40,25 +39,3 @@
             </p>
         </div>
     </div>
-</div>
-
-<script>
-//TODO - ADD ERROR HANDLING
-    function upvoteComplete(id)
-    {
-        $(`#upvote-${id} > i`).addClass('voted');
-        $(`#downvote-${id} > i`).removeClass('voted');
-        let votes = parseInt($(`#votes-${id}`).text());
-        $(`#votes-${id}`).text(votes + 1);
-        console.log(`#upvote-${id}`);
-    }
-
-    function downvoteComplete(id)
-    {
-        console.log(`#downvote-${id}`);
-        $(`#upvote-${id} > i`).removeClass('voted');
-        $(`#downvote-${id} > i`).addClass('voted');
-        let votes = parseInt($(`#votes-${id}`).text());
-        $(`#votes-${id}`).text(votes - 1);
-    }
-</script>

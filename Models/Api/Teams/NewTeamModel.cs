@@ -9,8 +9,8 @@ namespace TestApp.Models.Api.Teams
 {  
     public class NewTeamModel
     {
-        [JsonProperty("user")]
-        public IEnumerable<RoleModel> Roles { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 
     public class RoleModel

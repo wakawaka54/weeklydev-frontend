@@ -23,17 +23,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var team in Model.Teams)
+            @foreach (var team in Model.Teams)
             {
                 <tr>
                     <td>
-                        @team
+                        @team.Name
                     </td>
                     <td>
-                        Not populating this :c
+                        @if (team.Project != null)
+                        {
+                            @team.Project.Title
+                        }
                     </td>
                     <td>
-                        Not populating this :c
+                        <p>Manager @Html.Partial("Partials/UserIcon", team.Manager)</p>
+                        <p>Frontend @Html.Partial("Partials/UserIcon", team.Manager)</p>
+                        <p>Backend @Html.Partial("Partials/UserIcon", team.Manager)</p>
                     </td>
                 </tr>
             }

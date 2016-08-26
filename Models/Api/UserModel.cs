@@ -31,7 +31,17 @@ namespace TestApp.Models
 
         //TODO: Not populating with TeamModel, only getting shortid
         [JsonProperty("team")]
-        public IEnumerable<string> Teams { get; set; }
+        public IEnumerable<TeamModel> Teams { get; set; }
+
+        [JsonIgnore]
+        public string Image
+        {
+            get
+            {
+                return "~/images/user/default.jpg";
+            }
+
+        }
 
         public int Notifications()
         {
